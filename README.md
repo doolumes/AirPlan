@@ -47,7 +47,7 @@ Explain how to run the automated tests for this system
 Explain what these tests test and why
 
 ```
-Give an example
+run
 ```
 
 ### And coding style tests
@@ -55,7 +55,7 @@ Give an example
 Explain what these tests test and why
 
 ```
-Give an example
+Navigation, Checkout, Flight Traffic
 ```
 
 ## Deployment
