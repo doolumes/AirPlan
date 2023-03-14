@@ -5,6 +5,8 @@ import numpy as np
 import random
 import base64
 import webbrowser
+from pymongo import MongoClient
+from gridfs import GridFS
 
 @st.cache
 def load_data(date):
@@ -157,7 +159,16 @@ def displayplot():
     numluggage = st.number_input("Enter the number of check-in luggage: ", min_value = 0, step= 1)
     for i in range(0, numluggage):
         upload_file = st.file_uploader("Upload a picture of your {} luggage!".format(i+1), type=['png','jpeg','image','jpg'], accept_multiple_files=True, key=None, help="JPG, PNG only", on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
-    
+    client = MongoClient('mongodb://localhost:27017/')
+    db = client['AIRLINESDB']
+    fs = GridFS(db)
+
+    # open the image file
+    with open('myimage.jpg', 'rb') as f:
+        # create a new GridFS file
+        file_id = fs.put(f, filename='luggage.jpg')
+
+    print(f'Successfully uploaded image with ID: {file_id}')
 #     if numluggage>=1:
 #         st.button("Done", on_click=save())
 
